@@ -1,30 +1,95 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>XOGA</title>
-  <script>
-    (function () {
-      var parts = location.pathname.split('/').filter(Boolean); // ["m","123"]
-      var id = parts.length > 1 ? parts[1] : new URLSearchParams(location.search).get('id');
+  <style>
+    :root { --bg1:#0f1226; --bg2:#1a2040; --fg:#e6e8f2; }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      min-height: 100%;
+      display: grid;
+      place-items: center;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--fg);
+      background:
+        radial-gradient(900px 500px at 70% -10%, #263067 0%, transparent 60%),
+        linear-gradient(160deg, var(--bg1), var(--bg2));
+    }
 
-      // RELLENA estas URLs:
-      var iosStore = "https://apps.apple.com/app/idTU_APPLE_ID";
-      var androidStore = "https://play.google.com/store/apps/details?id=com.tu.paquete";
+    .card {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.06);
+      backdrop-filter: blur(6px);
+    }
 
-      // Si quieres que escritorio aterrice en tu SPA (login o detalle):
-      var webFallback = id ? ("/match/" + id) : "/";
+    h1 {
+      margin: 0 0 .5rem;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      letter-spacing: .2rem;
+      font-weight: 800;
+    }
 
-      var ua = navigator.userAgent || "";
-      var isAndroid = /Android/i.test(ua);
-      var isIOS = /iPhone|iPad|iPod/i.test(ua);
+    .subtitle {
+      font-size: clamp(1rem, 2.8vw, 1.4rem);
+      opacity: .9;
+      letter-spacing: .04rem;
+    }
 
-      if (isIOS)      location.replace(iosStore);
-      else if (isAndroid) location.replace(androidStore);
-      else            location.replace(webFallback);
-    })();
-  </script>
+    .rockets {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .rocket {
+      font-size: 2rem;
+      opacity: .9;
+      display: inline-block;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,.4));
+      animation: float 3s ease-in-out infinite;
+      transform-origin: center;
+    }
+    .rocket:nth-child(2) { animation-delay: .3s; }
+    .rocket:nth-child(3) { animation-delay: .6s; }
+    .rocket:nth-child(4) { animation-delay: .9s; }
+    .rocket:nth-child(5) { animation-delay: 1.2s; }
+
+    @keyframes float {
+      0%   { transform: translateY(0) rotate(-15deg); }
+      50%  { transform: translateY(-18px) rotate(-5deg); }
+      100% { transform: translateY(0) rotate(-15deg); }
+    }
+
+    footer { margin-top: 1.5rem; font-size: .8rem; opacity: .65; }
+  </style>
 </head>
-<body></body>
+<body>
+  <main class="card" role="main" aria-label="XOGA - Próximamente">
+    <h1>XOGA</h1>
+    <p class="subtitle">Próximamente</p>
+
+    <div class="rockets" aria-hidden="true">
+      <span class="rocket">🚀</span>
+      <span class="rocket">🚀</span>
+      <span class="rocket">🚀</span>
+      <span class="rocket">🚀</span>
+      <span class="rocket">🚀</span>
+    </div>
+
+    <footer>© <span id="year"></span> XOGA</footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
