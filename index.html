@@ -8,54 +8,41 @@
 
   <style>
     :root{
-      --bg:#000;             /* fondo negro */
-      --text:#caffca;        /* texto verdoso suave */
-
-      /* Color neón (verde de tu diseño) en RGB para controlar opacidades */
-      --nr:57; --ng:255; --nb:20; /* #39FF14 */
-
-      /* posición del foco principal (se actualiza por JS) */
-      --mx:50%;
-      --my:50%;
+      --bg:#000;
+      --text:#caffca;
+      /* Neon verde #39FF14 en RGB para opacidades */
+      --nr:57; --ng:255; --nb:20;
     }
 
-    *{box-sizing:border-box}
+    *{ box-sizing:border-box }
     html,body{
       height:100%;
       margin:0;
       background:var(--bg);
       color:var(--text);
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      overflow:hidden; /* sin scroll para el canvas */
     }
 
-    /* Capa del brillo que "sigue" al ratón */
-    .bg-glow{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      background:
-        radial-gradient(40vmin 40vmin at var(--mx) var(--my), rgba(var(--nr),var(--ng),var(--nb),.50), transparent 60%),
-        radial-gradient(26vmin 26vmin at calc(var(--mx) + 12%) calc(var(--my) + 6%), rgba(var(--nr),var(--ng),var(--nb),.28), transparent 70%),
-        radial-gradient(60vmin 60vmin at calc(var(--mx) - 18%) calc(var(--my) + 20%), rgba(var(--nr),var(--ng),var(--nb),.22), transparent 72%);
-      filter: blur(10px) saturate(120%);
-      transition: background .18s ease;
-      z-index:0;
+    /* lienzo del glow */
+    #glow{
+      position:fixed; inset:0;
+      width:100vw; height:100vh;
+      display:block; z-index:0;
+      pointer-events:none; /* no captura clicks */
     }
 
+    /* contenedor centrado */
     main{
-      position:relative;
-      z-index:1;
+      position:relative; z-index:1;
       min-height:100dvh;
-      display:grid;
-      place-items:center;    /* centra el contenido */
-      padding:4vmin;
-      user-select:none;
+      display:grid; place-items:center;
+      padding:4vmin; user-select:none;
       -webkit-tap-highlight-color:transparent;
     }
 
     .logo-wrap{
-      display:grid;
-      place-items:center;
+      display:grid; place-items:center;
       padding:clamp(6px,2vmin,16px);
       border-radius:20px;
       box-shadow:
@@ -63,21 +50,21 @@
         0 0 16px rgba(57,255,20,.28),
         0 0 40px rgba(57,255,20,.20);
       transition:transform .12s ease;
+      backdrop-filter: blur(0.2px);
     }
-    .logo-wrap:active{ transform:scale(.985); }
+    .logo-wrap:active{ transform:scale(.985) }
 
     .logo{
       width:clamp(140px,28vmin,300px);
-      height:auto;
-      display:block;
+      height:auto; display:block;
       filter:
         drop-shadow(0 0 5px rgba(57,255,20,.28))
         drop-shadow(0 0 14px rgba(57,255,20,.20));
     }
 
     .hint{
-      position:fixed;
-      bottom:18px; left:50%; transform:translateX(-50%);
+      position:fixed; bottom:18px; left:50%;
+      transform:translateX(-50%);
       font-size:.95rem; letter-spacing:.04em;
       color:#dfffd9; opacity:.85;
       text-shadow:0 0 8px rgba(57,255,20,.25);
@@ -85,72 +72,128 @@
     }
 
     @media (prefers-reduced-motion: reduce){
-      .bg-glow{ transition:none }
+      #glow{ display:none }
     }
   </style>
 </head>
 <body>
-  <div class="bg-glow" aria-hidden="true"></div>
+  <canvas id="glow"></canvas>
 
-  <main id="stage" >
+  <main >
     <div class="logo-wrap">
       <img class="logo" src="Logo_sinfondo.png" alt="XOGA" />
     </div>
   </main>
 
+
   <script>
-    // Suavizado tipo "lerp" para que el brillo siga con inercia
-    (function(){
-      const root = document.documentElement;
-      let targetX = 50, targetY = 50;   // destino en %
-      let currentX = 50, currentY = 50; // posición actual en %
-      const ease = 0.08;                // menor = más suave
+    (() => {
+      const canvas = document.getElementById('glow');
+      const ctx = canvas.getContext('2d');
 
-      function toPerc(clientX, clientY){
-        return {
-          x: Math.max(0, Math.min(100, clientX / window.innerWidth  * 100)),
-          y: Math.max(0, Math.min(100, clientY / window.innerHeight * 100)),
-        };
-      }
+      let W = canvas.width  = window.innerWidth;
+      let H = canvas.height = window.innerHeight;
 
-      function onPointerMove(x, y){
-        const p = toPerc(x, y);
-        targetX = p.x; targetY = p.y;
-        // iniciamos render si no está ya corriendo
-        if (!animId) tick();
-      }
+      // Estado del seguidor
+      let x = W/2, y = H/2;        // posición actual
+      let tx = x,   ty = y;        // destino (ratón/dedo)
+      let vx = 0,   vy = 0;        // velocidad (px/s, vector)
+      let speed = 0;               // módulo de la velocidad (px/s)
+      let lastT = performance.now();
+      const followEase = 0.15;     // suavizado de seguimiento
 
-      let animId = null;
-      function tick(){
-        // interpolación suave hacia el objetivo
-        currentX += (targetX - currentX) * ease;
-        currentY += (targetY - currentY) * ease;
+      // Mapea valor a rango [a,b]
+      const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+      const lerp  = (a, b, t) => a + (b - a) * t;
 
-        root.style.setProperty('--mx', currentX.toFixed(2) + '%');
-        root.style.setProperty('--my', currentY.toFixed(2) + '%');
-
-        // si aún no hemos llegado, seguimos animando
-        if (Math.abs(targetX - currentX) > 0.05 || Math.abs(targetY - currentY) > 0.05){
-          animId = requestAnimationFrame(tick);
-        }else{
-          animId = null;
-        }
-      }
-
-      // Ratón
-      window.addEventListener('mousemove', (e)=> onPointerMove(e.clientX, e.clientY), {passive:true});
-
-      // Táctil
-      window.addEventListener('touchmove', (e)=>{
-        const t = e.touches[0];
-        if (t) onPointerMove(t.clientX, t.clientY);
+      // Entrada ratón
+      window.addEventListener('mousemove', e => {
+        tx = e.clientX; ty = e.clientY;
       }, {passive:true});
 
-      // Al salir del viewport vuelve lentamente al centro
-      window.addEventListener('mouseleave', ()=> { targetX = 50; targetY = 50; if(!animId) tick(); });
+      // Entrada táctil
+      window.addEventListener('touchmove', e => {
+        const t = e.touches[0];
+        if (t) { tx = t.clientX; ty = t.clientY; }
+      }, {passive:true});
 
-      // Primer frame para fijar posición inicial
-      tick();
+      // Si sale del viewport, vuelve al centro lentamente
+      window.addEventListener('mouseleave', () => {
+        tx = W/2; ty = H/2;
+      });
+
+      // Resize
+      window.addEventListener('resize', () => {
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      });
+
+      function drawNeonBlob() {
+        // Fondo: no limpiar del todo → “estela” sutil
+        ctx.fillStyle = 'rgba(0,0,0,0.10)';
+        ctx.fillRect(0, 0, W, H);
+
+        // Interpolar la posición para inercia
+        x = lerp(x, tx, followEase);
+        y = lerp(y, ty, followEase);
+
+        const now = performance.now();
+        const dt = (now - lastT) / 1000; // segundos
+        // velocidad aproximada en px/s hacia el destino
+        const dx = (tx - x), dy = (ty - y);
+        const instVx = dx / Math.max(1e-3, dt);
+        const instVy = dy / Math.max(1e-3, dt);
+        // Filtro paso bajo para estabilizar
+        vx = lerp(vx, instVx, 0.25);
+        vy = lerp(vy, instVy, 0.25);
+        speed = Math.hypot(vx, vy);
+        lastT = now;
+
+        // Normalizar parámetros por velocidad
+        // Más velocidad → elipse más larga y más fina
+        const s = clamp(speed, 0, 1800);         // px/s
+        const tThin = 1 - s / 1800;              // 1..0
+        const radiusY = lerp(220, 60, 1 - tThin); // grosor (lento→grueso, rápido→fino)
+        const radiusX = lerp(240, 420, 1 - tThin); // longitud (lento→corto, rápido→largo)
+        const angle   = Math.atan2(vy, vx) || 0;
+
+        // Capas “neón” con aditivo
+        ctx.save();
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+
+        // Capa exterior (blur fuerte)
+        ctx.beginPath();
+        ctx.ellipse(0, 0, radiusX, radiusY, 0, 0, Math.PI * 2);
+        ctx.shadowColor = `rgba(${getComputedStyle(document.documentElement)
+                                  .getPropertyValue('--nr')}, ${getComputedStyle(document.documentElement)
+                                  .getPropertyValue('--ng')}, ${getComputedStyle(document.documentElement)
+                                  .getPropertyValue('--nb')}, 1)`;
+        ctx.shadowBlur = 80;
+        ctx.fillStyle = `rgba(57,255,20,0.18)`;
+        ctx.fill();
+
+        // Capa media
+        ctx.beginPath();
+        ctx.ellipse(0, 0, radiusX * 0.78, radiusY * 0.78, 0, 0, Math.PI * 2);
+        ctx.shadowBlur = 36;
+        ctx.fillStyle = `rgba(57,255,20,0.22)`;
+        ctx.fill();
+
+        // Capa núcleo
+        ctx.beginPath();
+        ctx.ellipse(0, 0, radiusX * 0.55, radiusY * 0.55, 0, 0, Math.PI * 2);
+        ctx.shadowBlur = 16;
+        ctx.fillStyle = `rgba(57,255,20,0.28)`;
+        ctx.fill();
+
+        ctx.restore();
+
+        requestAnimationFrame(drawNeonBlob);
+      }
+
+      requestAnimationFrame(drawNeonBlob);
     })();
   </script>
 </body>
