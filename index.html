@@ -1,200 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>XOGA</title>
-  <meta name="color-scheme" content="dark">
-
-  <style>
-    :root{
-      --bg:#000;
-      --text:#caffca;
-      /* Neon verde #39FF14 en RGB para opacidades */
-      --nr:57; --ng:255; --nb:20;
-    }
-
-    *{ box-sizing:border-box }
-    html,body{
-      height:100%;
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
-      overflow:hidden; /* sin scroll para el canvas */
-    }
-
-    /* lienzo del glow */
-    #glow{
-      position:fixed; inset:0;
-      width:100vw; height:100vh;
-      display:block; z-index:0;
-      pointer-events:none; /* no captura clicks */
-    }
-
-    /* contenedor centrado */
-    main{
-      position:relative; z-index:1;
-      min-height:100dvh;
-      display:grid; place-items:center;
-      padding:4vmin; user-select:none;
-      -webkit-tap-highlight-color:transparent;
-    }
-
-    .logo-wrap{
-      display:grid; place-items:center;
-      padding:clamp(6px,2vmin,16px);
-      border-radius:20px;
-      box-shadow:
-        0 0 0 2px rgba(57,255,20,.28) inset,
-        0 0 16px rgba(57,255,20,.28),
-        0 0 40px rgba(57,255,20,.20);
-      transition:transform .12s ease;
-      backdrop-filter: blur(0.2px);
-    }
-    .logo-wrap:active{ transform:scale(.985) }
-
-    .logo{
-      width:clamp(140px,28vmin,300px);
-      height:auto; display:block;
-      filter:
-        drop-shadow(0 0 5px rgba(57,255,20,.28))
-        drop-shadow(0 0 14px rgba(57,255,20,.20));
-    }
-
-    .hint{
-      position:fixed; bottom:18px; left:50%;
-      transform:translateX(-50%);
-      font-size:.95rem; letter-spacing:.04em;
-      color:#dfffd9; opacity:.85;
-      text-shadow:0 0 8px rgba(57,255,20,.25);
-      z-index:2; pointer-events:none;
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      #glow{ display:none }
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XOGA Interactive Neon</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <canvas id="glow"></canvas>
+  <div class="bg-glow" aria-hidden="true"></div>
 
-  <main >
+  <main id="stage">
     <div class="logo-wrap">
       <img class="logo" src="Logo_sinfondo.png" alt="XOGA" />
     </div>
+    <canvas id="scene"></canvas>
   </main>
 
-
-  <script>
-    (() => {
-      const canvas = document.getElementById('glow');
-      const ctx = canvas.getContext('2d');
-
-      let W = canvas.width  = window.innerWidth;
-      let H = canvas.height = window.innerHeight;
-
-      // Estado del seguidor
-      let x = W/2, y = H/2;        // posición actual
-      let tx = x,   ty = y;        // destino (ratón/dedo)
-      let vx = 0,   vy = 0;        // velocidad (px/s, vector)
-      let speed = 0;               // módulo de la velocidad (px/s)
-      let lastT = performance.now();
-      const followEase = 0.15;     // suavizado de seguimiento
-
-      // Mapea valor a rango [a,b]
-      const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-      const lerp  = (a, b, t) => a + (b - a) * t;
-
-      // Entrada ratón
-      window.addEventListener('mousemove', e => {
-        tx = e.clientX; ty = e.clientY;
-      }, {passive:true});
-
-      // Entrada táctil
-      window.addEventListener('touchmove', e => {
-        const t = e.touches[0];
-        if (t) { tx = t.clientX; ty = t.clientY; }
-      }, {passive:true});
-
-      // Si sale del viewport, vuelve al centro lentamente
-      window.addEventListener('mouseleave', () => {
-        tx = W/2; ty = H/2;
-      });
-
-      // Resize
-      window.addEventListener('resize', () => {
-        W = canvas.width  = window.innerWidth;
-        H = canvas.height = window.innerHeight;
-      });
-
-      function drawNeonBlob() {
-        // Fondo: no limpiar del todo → “estela” sutil
-        ctx.fillStyle = 'rgba(0,0,0,0.10)';
-        ctx.fillRect(0, 0, W, H);
-
-        // Interpolar la posición para inercia
-        x = lerp(x, tx, followEase);
-        y = lerp(y, ty, followEase);
-
-        const now = performance.now();
-        const dt = (now - lastT) / 1000; // segundos
-        // velocidad aproximada en px/s hacia el destino
-        const dx = (tx - x), dy = (ty - y);
-        const instVx = dx / Math.max(1e-3, dt);
-        const instVy = dy / Math.max(1e-3, dt);
-        // Filtro paso bajo para estabilizar
-        vx = lerp(vx, instVx, 0.25);
-        vy = lerp(vy, instVy, 0.25);
-        speed = Math.hypot(vx, vy);
-        lastT = now;
-
-        // Normalizar parámetros por velocidad
-        // Más velocidad → elipse más larga y más fina
-        const s = clamp(speed, 0, 1800);         // px/s
-        const tThin = 1 - s / 1800;              // 1..0
-        const radiusY = lerp(220, 60, 1 - tThin); // grosor (lento→grueso, rápido→fino)
-        const radiusX = lerp(240, 420, 1 - tThin); // longitud (lento→corto, rápido→largo)
-        const angle   = Math.atan2(vy, vx) || 0;
-
-        // Capas “neón” con aditivo
-        ctx.save();
-        ctx.globalCompositeOperation = 'lighter';
-        ctx.translate(x, y);
-        ctx.rotate(angle);
-
-        // Capa exterior (blur fuerte)
-        ctx.beginPath();
-        ctx.ellipse(0, 0, radiusX, radiusY, 0, 0, Math.PI * 2);
-        ctx.shadowColor = `rgba(${getComputedStyle(document.documentElement)
-                                  .getPropertyValue('--nr')}, ${getComputedStyle(document.documentElement)
-                                  .getPropertyValue('--ng')}, ${getComputedStyle(document.documentElement)
-                                  .getPropertyValue('--nb')}, 1)`;
-        ctx.shadowBlur = 80;
-        ctx.fillStyle = `rgba(57,255,20,0.18)`;
-        ctx.fill();
-
-        // Capa media
-        ctx.beginPath();
-        ctx.ellipse(0, 0, radiusX * 0.78, radiusY * 0.78, 0, 0, Math.PI * 2);
-        ctx.shadowBlur = 36;
-        ctx.fillStyle = `rgba(57,255,20,0.22)`;
-        ctx.fill();
-
-        // Capa núcleo
-        ctx.beginPath();
-        ctx.ellipse(0, 0, radiusX * 0.55, radiusY * 0.55, 0, 0, Math.PI * 2);
-        ctx.shadowBlur = 16;
-        ctx.fillStyle = `rgba(57,255,20,0.28)`;
-        ctx.fill();
-
-        ctx.restore();
-
-        requestAnimationFrame(drawNeonBlob);
-      }
-
-      requestAnimationFrame(drawNeonBlob);
-    })();
-  </script>
+  <script src="main.js"></script>
 </body>
 </html>
