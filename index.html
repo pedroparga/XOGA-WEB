@@ -4,91 +4,104 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>XOGA</title>
+  <meta name="color-scheme" content="dark">
+
   <style>
-    :root { --bg1:#0f1226; --bg2:#1a2040; --fg:#e6e8f2; }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      min-height: 100%;
+    :root{
+      /* Paleta “neón” de tu imagen */
+      --bg: #000000;          /* negro */
+      --neon: #39FF14;        /* verde neón */
+      --neon-soft: rgba(57,255,20,.22);
+      --neon-strong: rgba(57,255,20,.45);
+      --text: #caffca;
+    }
+
+    *{ box-sizing:border-box; }
+    html, body{
+      height:100%;
+      margin:0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+    }
+
+    /* Brillos suaves del fondo */
+    .bg-glow{
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(42vmin 42vmin at 25% 30%, var(--neon-strong), transparent 60%),
+        radial-gradient(34vmin 34vmin at 75% 25%, var(--neon-soft), transparent 70%),
+        radial-gradient(58vmin 58vmin at 50% 85%, var(--neon-soft), transparent 70%);
+      filter: blur(10px) saturate(120%);
+      opacity: .9;
+      z-index: 0;
+      animation: float 10s ease-in-out infinite alternate;
+    }
+    @keyframes float{
+      from{ transform: translateY(-1%); }
+      to  { transform: translateY(1%); }
+    }
+
+    /* Centrado perfecto */
+    main{
+      position: relative;
+      z-index: 1;
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;   /* centra horizontal y vertical */
+      padding: 4vmin;
+    }
+
+    /* Marco del logo con efecto neón sutil */
+    .logo-wrap{
       display: grid;
       place-items: center;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color: var(--fg);
-      background:
-        radial-gradient(900px 500px at 70% -10%, #263067 0%, transparent 60%),
-        linear-gradient(160deg, var(--bg1), var(--bg2));
-    }
-
-    .card {
-      text-align: center;
-      padding: 3rem 2rem;
+      padding: clamp(6px, 2vmin, 16px);
       border-radius: 20px;
-      background: rgba(255,255,255,0.04);
-      box-shadow: 0 10px 30px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.06);
-      backdrop-filter: blur(6px);
+      box-shadow:
+        0 0 0 2px rgba(57,255,20,.28) inset,
+        0 0 16px rgba(57,255,20,.28),
+        0 0 40px rgba(57,255,20,.20);
     }
 
-    h1 {
-      margin: 0 0 .5rem;
-      font-size: clamp(2.2rem, 6vw, 4rem);
-      letter-spacing: .2rem;
-      font-weight: 800;
+    /* Tamaño contenido y responsivo del logo */
+    .logo{
+      width: clamp(140px, 28vmin, 300px); /* más pequeño y adaptable */
+      height: auto;
+      display: block;
+      filter:
+        drop-shadow(0 0 5px rgba(57,255,20,.28))
+        drop-shadow(0 0 14px rgba(57,255,20,.20));
     }
 
-    .subtitle {
-      font-size: clamp(1rem, 2.8vw, 1.4rem);
-      opacity: .9;
-      letter-spacing: .04rem;
+    .tagline{
+      margin-top: 1rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-shadow:
+        0 0 8px rgba(57,255,20,.25),
+        0 0 18px rgba(57,255,20,.2);
     }
 
-    .rockets {
-      margin-top: 2rem;
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      align-items: flex-end;
+    @media (prefers-contrast: more){
+      .bg-glow{ opacity:.6; filter:none; }
+      .logo-wrap{ box-shadow: 0 0 0 2px var(--neon) inset; }
     }
-
-    .rocket {
-      font-size: 2rem;
-      opacity: .9;
-      display: inline-block;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,.4));
-      animation: float 3s ease-in-out infinite;
-      transform-origin: center;
-    }
-    .rocket:nth-child(2) { animation-delay: .3s; }
-    .rocket:nth-child(3) { animation-delay: .6s; }
-    .rocket:nth-child(4) { animation-delay: .9s; }
-    .rocket:nth-child(5) { animation-delay: 1.2s; }
-
-    @keyframes float {
-      0%   { transform: translateY(0) rotate(-15deg); }
-      50%  { transform: translateY(-18px) rotate(-5deg); }
-      100% { transform: translateY(0) rotate(-15deg); }
-    }
-
-    footer { margin-top: 1.5rem; font-size: .8rem; opacity: .65; }
   </style>
 </head>
 <body>
-  <main class="card" role="main" aria-label="XOGA - Próximamente">
-    <h1>XOGA</h1>
+  <!-- Brillos de fondo -->
+  <div class="bg-glow" aria-hidden="true"></div>
 
-    <div class="rockets" aria-hidden="true">
-      <span class="rocket">🚀</span>
-      <span class="rocket">🚀</span>
-      <span class="rocket">🚀</span>
-      <span class="rocket">🚀</span>
-      <span class="rocket">🚀</span>
+  <main>
+    <div class="logo-wrap" role="img" aria-label="Logo XOGA con efecto neón">
+      <!-- Asegúrate de que el archivo exista junto a este HTML -->
+      <img class="logo" src="Logo_sinfondo.png" alt="XOGA" />
     </div>
-
-    <footer>© <span id="year"></span> XOGA</footer>
+    <!-- Texto opcional bajo el logo (puedes eliminarlo) -->
+    <!-- <div class="tagline">Play • Meet • Enjoy</div> -->
   </main>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
