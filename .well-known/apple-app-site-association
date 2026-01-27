@@ -3,8 +3,8 @@
     "apps": [],
     "details": [
       {
-        "appID": "TU_TEAM_ID.com.tu.bundleid",
-        "paths": [ "/match/*", "/m/*" ]
+        "appID": "96R74G8KFG.com.example.xoga",
+        "paths": [ "/m/*", "/match/*", "/s/*", "/share/*" ]
       }
     ]
   }
