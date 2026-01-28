@@ -180,22 +180,42 @@ body {
 .hero-actions {
   display: flex;
   gap: 12px;
-  margin-top: 24px;
+  margin-top: 56px;
 }
 
-.hero-actions .cta,
-.hero-actions .ghost {
-  padding: 18px 32px;
+.download-label {
+  margin: 80px 0 -40px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.store-btn {
+  padding: 10px 20px;
+  text-transform: uppercase;
+  border-radius: 8px;
   font-size: 17px;
-  border-radius: 14px;
+  font-weight: 500;
+  color: #ffffff80;
+  text-shadow: none;
+  background: transparent;
+  cursor: pointer;
+  box-shadow: transparent;
+  border: 1px solid #ffffff80;
+  transition: 0.5s ease;
+  user-select: none;
 }
 
-.ghost {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: var(--ink);
-  border-radius: 12px;
-  cursor: pointer;
+.store-btn:hover,
+.store-btn:focus {
+  color: #ffffff;
+  background: var(--lime);
+  border: 1px solid var(--lime);
+  text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+  box-shadow: 0 0 4px var(--lime), 0 0 12px var(--lime),
+    0 0 28px var(--lime), 0 0 60px var(--lime);
 }
 
 .social-proof {
