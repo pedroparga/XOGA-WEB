@@ -758,6 +758,16 @@ body {
   letter-spacing: 0.5px;
   font-size: 16px;
   text-align: center;
+  width: 100%;
+  order: 1;
+}
+
+.footer-social {
+  order: 2;
+}
+
+.footer-links {
+  order: 3;
 }
 
 .footer-social {
@@ -805,6 +815,376 @@ body {
   color: rgba(166, 189, 200, 0.65);
   font-size: 12px;
   letter-spacing: 0.4px;
+}
+
+.about-page {
+  padding: 80px 6vw 110px;
+  display: grid;
+  gap: 70px;
+}
+
+.about-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.about-hero h1 {
+  margin: 0 0 8px;
+  font-size: clamp(36px, 5vw, 56px);
+}
+
+.about-hero h2 {
+  margin: 0 0 16px;
+  font-size: clamp(20px, 3vw, 28px);
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.about-kicker {
+  color: var(--lime);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+
+.about-hero-visual {
+  background: rgba(4, 16, 22, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.about-hero-visual img {
+  width: 100%;
+  display: block;
+  border-radius: 14px;
+}
+
+.about-section h3 {
+  margin: 0 0 12px;
+  font-size: 22px;
+}
+
+.about-section p {
+  margin: 0 0 10px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.about-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.about-split h4 {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.values-card {
+  background: rgba(4, 16, 22, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+.values-card h4 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.values-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.who-list {
+  display: grid;
+  gap: 8px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.team-card {
+  background: rgba(4, 16, 22, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 18px;
+  text-align: center;
+}
+
+.team-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  background: radial-gradient(circle, rgba(125, 255, 58, 0.2), transparent 60%);
+  border: 1px solid rgba(125, 255, 58, 0.35);
+}
+
+.about-cta {
+  background: rgba(4, 16, 22, 0.75);
+  border: 1px solid rgba(125, 255, 58, 0.2);
+  border-radius: 18px;
+  padding: 28px;
+  text-align: center;
+}
+
+.about-cta h3 {
+  margin: 0 0 14px;
+}
+
+.contact-page {
+  padding: 70px 6vw 110px;
+  display: grid;
+  gap: 50px;
+}
+
+.contact-hero h1 {
+  margin: 8px 0 10px;
+  font-size: clamp(32px, 4.5vw, 50px);
+}
+
+.contact-hero p {
+  color: var(--muted);
+  margin: 0;
+}
+
+.contact-kicker {
+  color: var(--lime);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+
+.contact-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 30px;
+  align-items: start;
+}
+
+.contact-form {
+  background: rgba(4, 16, 22, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.contact-form h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.contact-form p {
+  margin: 0 0 18px;
+  color: var(--muted);
+}
+
+.contact-form form {
+  display: grid;
+  gap: 14px;
+}
+
+.contact-form label {
+  display: grid;
+  gap: 8px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  background: rgba(4, 16, 22, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 12px 14px;
+  color: var(--ink);
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: rgba(125, 255, 58, 0.5);
+  box-shadow: 0 0 0 2px rgba(125, 255, 58, 0.15);
+}
+
+.form-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.contact-side {
+  background: rgba(4, 16, 22, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 22px;
+}
+
+.contact-side h3 {
+  margin: 0 0 10px;
+}
+
+.contact-side p {
+  margin: 0 0 8px;
+  color: var(--muted);
+}
+
+.contact-support {
+  background: rgba(4, 16, 22, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 22px;
+  display: grid;
+  gap: 12px;
+}
+
+.contact-cta {
+  background: rgba(4, 16, 22, 0.75);
+  border: 1px solid rgba(125, 255, 58, 0.2);
+  border-radius: 18px;
+  padding: 24px;
+  text-align: center;
+}
+
+.contact-cta h3 {
+  margin: 0 0 12px;
+}
+
+.faq-page {
+  padding: 70px 6vw 110px;
+  display: grid;
+  gap: 40px;
+}
+
+.faq-hero h1 {
+  margin: 8px 0 0;
+  font-size: clamp(32px, 4.5vw, 50px);
+}
+
+.faq-list {
+  display: grid;
+  gap: 14px;
+}
+
+.faq-item {
+  background: rgba(4, 16, 22, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 14px 18px;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35);
+}
+
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  color: var(--lime);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.faq-item[open] summary::after {
+  content: "−";
+}
+
+.faq-item p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.faq-help,
+.faq-cta {
+  background: rgba(4, 16, 22, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 22px;
+  text-align: center;
+  display: grid;
+  gap: 12px;
+}
+
+.privacy-page {
+  padding: 70px 6vw 110px;
+  display: grid;
+  gap: 28px;
+}
+
+.privacy-hero h1 {
+  margin: 8px 0 10px;
+  font-size: clamp(32px, 4.5vw, 50px);
+}
+
+.privacy-hero p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.privacy-section {
+  background: rgba(4, 16, 22, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.privacy-section h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.privacy-section p {
+  margin: 0 0 8px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.privacy-list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.privacy-list li::marker {
+  color: var(--lime);
 }
 @media (max-width: 1100px) {
   .topbar {
@@ -908,6 +1288,22 @@ body {
 
   .sports-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .about-split {
+    grid-template-columns: 1fr;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-main {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1040,6 +1436,27 @@ body {
 
   .site-footer {
     padding: 40px 5vw 50px;
+  }
+
+  .about-page {
+    padding: 60px 5vw 80px;
+    gap: 50px;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-page {
+    padding: 60px 5vw 80px;
+  }
+
+  .faq-page {
+    padding: 60px 5vw 80px;
+  }
+
+  .privacy-page {
+    padding: 60px 5vw 80px;
   }
 
   .footer-inner {
