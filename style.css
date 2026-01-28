@@ -516,6 +516,28 @@ body {
   line-height: 1.6;
 }
 
+@media (max-width: 1500px) {
+  .showcase-copy {
+    margin-top: -110px;
+  }
+
+  .showcase-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .showcase-copy {
+    order: 1;
+  }
+
+  .showcase-visual {
+    order: 2;
+  }
+
+  .sports-band {
+    margin-top: 130px;
+  }
+}
+
 .showcase-visual {
   position: relative;
   min-height: 520px;
@@ -784,7 +806,7 @@ body {
   font-size: 12px;
   letter-spacing: 0.4px;
 }
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .topbar {
     flex-wrap: wrap;
     gap: 12px;
@@ -924,11 +946,13 @@ body {
   }
 
   .download-label {
-    margin: 30px 0 -20px;
+    margin: 44px 0 -8px;
+    text-align: center;
   }
 
   .hero-actions {
     margin-top: 28px;
+    justify-content: center;
   }
 
   .store-btn {

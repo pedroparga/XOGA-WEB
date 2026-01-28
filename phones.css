@@ -96,6 +96,20 @@
   animation: none;
 }
 
+@media (max-width: 1500px) {
+  .showcase-visual .iphone-a {
+    top: -180px;
+  }
+
+  .showcase-visual .iphone-b {
+    top: -250px;
+  }
+
+  .showcase-visual .iphone-c {
+    top: -120px;
+  }
+}
+
 /* iPhone 16 Main Body Container - 2556×1179 resolution */
 .iphone-body {
   --body-radius: 45px;
