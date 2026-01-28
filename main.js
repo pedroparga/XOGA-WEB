@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const topbar = document.querySelector(".topbar");
   if (!topbar) return;
 
+  const nav = document.querySelector(".nav");
+  const menuToggle = document.querySelector(".menu-toggle");
+
   let isTop = null;
   let ticking = false;
   const enterTop = 20;
@@ -25,4 +28,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   applyState();
   window.addEventListener("scroll", onScroll, { passive: true });
+
+  if (menuToggle && nav) {
+    const closeMenu = () => {
+      nav.classList.remove("is-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    };
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = nav.classList.toggle("is-open");
+      menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+
+    nav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 600) closeMenu();
+    });
+  }
 });

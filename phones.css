@@ -395,3 +395,29 @@
     top: 120px;
   }
 }
+
+@media (max-width: 600px) {
+  .hero-visual {
+    height: 420px;
+  }
+
+  .hero-visual .iphone-body {
+    transform: scale(0.85);
+  }
+
+  .showcase-visual .iphone-body {
+    transform: scale(0.8);
+  }
+
+  .showcase-visual .iphone-a {
+    left: -10px;
+  }
+
+  .showcase-visual .iphone-b {
+    left: 90px;
+  }
+
+  .showcase-visual .iphone-c {
+    left: 190px;
+  }
+}
