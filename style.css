@@ -150,11 +150,6 @@ body {
   border-radius: 999px;
 }
 
-.nav-toggle {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
 .ghost-link {
   color: var(--muted);
   text-decoration: none;
@@ -816,10 +811,6 @@ body {
     display: flex;
   }
 
-  .nav-toggle:checked + .nav {
-    display: flex;
-  }
-
   .topbar.menu-open .nav {
     display: flex;
   }
@@ -885,6 +876,14 @@ body {
 
   .hero-actions {
     gap: 10px;
+  }
+
+  .download-label {
+    margin: 30px 0 -20px;
+  }
+
+  .hero-actions {
+    margin-top: 28px;
   }
 
   .store-btn {

@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     menuToggle.addEventListener(
       "touchstart",
       (e) => {
-        e.preventDefault();
+        if (e.cancelable) e.preventDefault();
         toggleMenu();
       },
       { passive: false }
