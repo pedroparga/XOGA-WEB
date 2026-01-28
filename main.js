@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const topbar = document.querySelector(".topbar");
   if (!topbar) return;
 
-  const nav = document.querySelector(".nav");
+  const nav = document.getElementById("main-nav") || document.querySelector(".nav");
   const menuToggle = document.querySelector(".menu-toggle");
 
   let isTop = null;
@@ -33,12 +33,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeMenu = () => {
       nav.classList.remove("is-open");
       menuToggle.setAttribute("aria-expanded", "false");
+      topbar.classList.remove("menu-open");
+      nav.style.display = "";
     };
 
-    menuToggle.addEventListener("click", () => {
+    const toggleMenu = () => {
       const isOpen = nav.classList.toggle("is-open");
       menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-    });
+      topbar.classList.toggle("menu-open", isOpen);
+      nav.style.display = isOpen ? "flex" : "";
+    };
+
+    menuToggle.addEventListener("click", toggleMenu);
+    menuToggle.addEventListener(
+      "touchstart",
+      (e) => {
+        e.preventDefault();
+        toggleMenu();
+      },
+      { passive: false }
+    );
 
     nav.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", closeMenu);

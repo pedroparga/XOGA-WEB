@@ -125,6 +125,8 @@ body {
   display: flex;
   align-items: center;
   gap: 16px;
+  position: relative;
+  z-index: 12;
 }
 
 .menu-toggle {
@@ -148,6 +150,11 @@ body {
   border-radius: 999px;
 }
 
+.nav-toggle {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
 .ghost-link {
   color: var(--muted);
   text-decoration: none;
@@ -806,6 +813,14 @@ body {
   }
 
   .nav.is-open {
+    display: flex;
+  }
+
+  .nav-toggle:checked + .nav {
+    display: flex;
+  }
+
+  .topbar.menu-open .nav {
     display: flex;
   }
 
