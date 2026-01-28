@@ -4,7 +4,7 @@ function createEmojiMesh(container, options) {
   if (!container) return;
 
   var opts = options || {};
-  var EMOJIS = ["\u26BD\uFE0F", "\uD83C\uDFC0", "\uD83C\uDFBE", "\uD83C\uDFC8"];
+  var EMOJIS = opts.emojis || ["\u26BD\uFE0F", "\uD83C\uDFC0", "\uD83C\uDFBE", "\uD83C\uDFC8"];
 
   var canvas = document.createElement('canvas');
   canvas.className = 'pg-canvas';
@@ -127,3 +127,24 @@ createEmojiMesh(document.getElementById('ticker-icons'), {
   drawLines: false,
   damping: 1
 });
+
+var sportsBgs = document.querySelectorAll('.sports-bg');
+for (var i = 0; i < sportsBgs.length; i++) {
+  var el = sportsBgs[i];
+  var emoji = el.getAttribute('data-emoji') || "\u26BD\uFE0F";
+  createEmojiMesh(el, {
+    emojis: [emoji],
+    dotColor: 'rgba(255, 255, 255, 1)',
+    iconOpacity: 0.6,
+    lineColor: 'rgba(255, 255, 255, ALPHA)',
+    density: 24000,
+    proximity: 140,
+    maxSpeed: 0.25,
+    emojiSize: 20,
+    mouseRadius: 180,
+    mouseForce: 0.01,
+    interactive: false,
+    drawLines: false,
+    damping: 1
+  });
+}

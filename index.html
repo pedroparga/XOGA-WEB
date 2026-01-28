@@ -10,6 +10,7 @@
   <script src="main.js" defer></script>
 </head>
 <body>
+  <div id="top"></div>
   <div class="page">
     <header class="topbar">
       <div class="topbar-inner">
@@ -18,10 +19,10 @@
           <span class="brand-text">XOGA</span>
         </div>
         <nav class="nav">
-          <a href="#">Como se usa</a>
-          <a href="#">Sobre nosotros</a>
-          <a href="#">Contacto</a>
-          <a href="#">Preguntas frecuentes</a>
+          <a href="#como-se-usa">Como se usa</a>
+          <a href="sobre-nosotros.html">Sobre nosotros</a>
+          <a href="contacto.html">Contacto</a>
+          <a href="preguntas-frecuentes.html">Preguntas frecuentes</a>
         </nav>
         <div class="topbar-actions">
           <a class="ghost-link" href="#"></a>
@@ -109,29 +110,238 @@
       </div>
     </section>
 
-    <section class="feature-band">
-      <div class="feature-header">
-        <span class="feature-kicker">XOGA en cualquier lado</span>
-        <h2>Como funciona la app</h2>
-        <p>
-          textotextotextotextotextotextotextotextotextotextotextotextotextotextotexto
-        </p>
+    <section class="why-band">
+      <div class="why-header">
+        <span class="why-kicker">¿Por que XOGA?</span>
+        <h2>Organizar partidos nunca fue tan facil.</h2>
       </div>
-      <div class="feature-grid">
-        <article class="feature-card">
-          <h3>Crea Partidos</h3>
-          <p>texto</p>
+      <div class="why-grid">
+        <article class="why-card">
+          <span class="why-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22">
+              <path d="M9.5 12.5l2 2 3.5-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M12 3a9 9 0 1 0 0 18a9 9 0 0 0 0-18z" fill="none" stroke="currentColor" stroke-width="2"></path>
+            </svg>
+          </span>
+          <h3>Sin lios de mensajes</h3>
+          <p>Todo el mundo ve horario, nivel y plazas disponibles en tiempo real.</p>
         </article>
-        <article class="feature-card">
-          <h3>Únete a equipos</h3>
-          <p>texto</p>
+        <article class="why-card">
+          <span class="why-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22">
+              <path d="M12 2v4M12 18v4M2 12h4M18 12h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+              <path d="M12 7a5 5 0 1 0 0 10a5 5 0 0 0 0-10z" fill="none" stroke="currentColor" stroke-width="2"></path>
+            </svg>
+          </span>
+          <h3>Juega con gente de tu nivel</h3>
+          <p>Evita partidos desequilibrados y disfruta de cada encuentro.</p>
         </article>
-        <article class="feature-card">
-          <h3>Motivacion diaria</h3>
-          <p>texto</p>
+        <article class="why-card">
+          <span class="why-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22">
+              <path d="M12 2l4 8-4 12-4-12 4-8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
+              <circle cx="12" cy="10" r="2.5" fill="none" stroke="currentColor" stroke-width="2"></circle>
+            </svg>
+          </span>
+          <h3>Partidos cerca de ti</h3>
+          <p>Encuentra jugadores y pistas en tu zona sin perder tiempo.</p>
+        </article>
+        <article class="why-card">
+          <span class="why-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22">
+              <path d="M12 3a9 9 0 1 0 9 9" fill="none" stroke="currentColor" stroke-width="2"></path>
+              <path d="M12 7v6l4 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          <h3>Mas juego, menos organizacion</h3>
+          <p>XOGA se encarga de todo, tu solo juega.</p>
         </article>
       </div>
     </section>
+
+    <section class="showcase-band">
+      <div class="showcase-inner">
+        <div class="showcase-visual" aria-hidden="true">
+          <div class="iphones-container showcase-phones">
+            <div class="iphone-mockup iphone-a">
+              <div class="iphone-body">
+                <div class="iphone-notch"></div>
+                <div class="iphone-speaker"></div>
+                <div class="iphone-screen">
+                  <div class="iphone-content">
+                    <img src="imagenes/home-negro.png" alt="Crear partido" class="app-image" />
+                  </div>
+                </div>
+                <div class="iphone-home-button"></div>
+              </div>
+            </div>
+            <div class="iphone-mockup iphone-b">
+              <div class="iphone-body">
+                <div class="iphone-notch"></div>
+                <div class="iphone-speaker"></div>
+                <div class="iphone-screen">
+                  <div class="iphone-content">
+                    <img src="imagenes/crear-partido-negro.png" alt="Lista de partidos" class="app-image" />
+                  </div>
+                </div>
+                <div class="iphone-home-button"></div>
+              </div>
+            </div>
+            <div class="iphone-mockup iphone-c">
+              <div class="iphone-body">
+                <div class="iphone-notch"></div>
+                <div class="iphone-speaker"></div>
+                <div class="iphone-screen">
+                  <div class="iphone-content">
+                    <img src="imagenes/login-negro.png" alt="Perfil y nivel" class="app-image" />
+                  </div>
+                </div>
+                <div class="iphone-home-button"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="showcase-copy">
+          <span class="showcase-kicker">Asi se ve XOGA</span>
+          <h2>Todo el control en tu bolsillo</h2>
+          <p>Crea, unete y juega. Asi de simple.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sports-band">
+      <div class="sports-header">
+        <span class="sports-kicker">Deportes disponibles</span>
+        <h2>Elige tu deporte</h2>
+      </div>
+      <div class="sports-grid">
+        <article class="sports-card">
+          <div class="sports-bg" data-emoji="⚽" aria-hidden="true"></div>
+          <div class="sports-content">
+            <h3>Futbol</h3>
+          </div>
+        </article>
+        <article class="sports-card">
+          <div class="sports-bg" data-emoji="🏀" aria-hidden="true"></div>
+          <div class="sports-content">
+            <h3>Basket</h3>
+          </div>
+        </article>
+        <article class="sports-card">
+          <div class="sports-bg" data-emoji="🎾" aria-hidden="true"></div>
+          <div class="sports-content">
+            <h3>Tenis</h3>
+          </div>
+        </article>
+        <article class="sports-card">
+          <div class="sports-bg" data-emoji="🏐" aria-hidden="true"></div>
+          <div class="sports-content">
+            <h3>Voley</h3>
+          </div>
+        </article>
+      </div>
+      <p class="sports-note">Y muchos mas en camino...</p>
+    </section>
+
+    <section class="cta-band">
+      <div class="cta-inner">
+        <div class="cta-copy">
+          <h2>Empieza a jugar hoy</h2>
+        </div>
+        <div class="cta-actions">
+          <a class="cta-primary" href="#top">Descargar app</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band" id="como-se-usa">
+      <div class="feature-header">
+        <span class="feature-kicker">Como se usa XOGA</span>
+        <h2>Jugar nunca fue tan facil. En solo unos pasos:</h2>
+      </div>
+      <div class="steps-grid">
+        <article class="step-card">
+          <div class="step-top">
+            <span class="step-number">1</span>
+            <span class="step-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <path d="M12 12a4 4 0 1 0-4-4a4 4 0 0 0 4 4z" fill="none" stroke="currentColor" stroke-width="2"></path>
+                <path d="M4 20a8 8 0 0 1 16 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+              </svg>
+            </span>
+          </div>
+          <h3>Registrate</h3>
+          <p>Crea tu perfil en segundos y elige deportes y nivel.</p>
+        </article>
+        <article class="step-card">
+          <div class="step-top">
+            <span class="step-number">2</span>
+            <span class="step-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <path d="M7 4h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="2"></path>
+                <path d="M8 10h8M8 14h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+              </svg>
+            </span>
+          </div>
+          <h3>Crea o unete</h3>
+          <p>Elige deporte, horario y lugar o unete a partidos cercanos.</p>
+        </article>
+        <article class="step-card">
+          <div class="step-top">
+            <span class="step-number">3</span>
+            <span class="step-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <path d="M5 12l4 4 10-10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+          </div>
+          <h3>Confirma y juega</h3>
+          <p>Controla plazas y confirma asistencia sin lios.</p>
+        </article>
+        <article class="step-card">
+          <div class="step-top">
+            <span class="step-number">4</span>
+            <span class="step-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <path d="M8 4h8v4a4 4 0 0 1-8 0V4z" fill="none" stroke="currentColor" stroke-width="2"></path>
+                <path d="M6 4h12M9 18h6M8 22h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+              </svg>
+            </span>
+          </div>
+          <h3>Mejora y compite</h3>
+          <p>Registra tu progreso y sube de nivel.</p>
+        </article>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4z" fill="none" stroke="currentColor" stroke-width="2"></path>
+              <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"></circle>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor"></circle>
+            </svg>
+            Instagram
+          </a>
+          <a href="#" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path d="M14 4c1.2 1.7 2.7 2.7 4.5 2.9V10c-1.9 0-3.6-.6-4.5-1.5V16a4 4 0 1 1-4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            TikTok
+          </a>
+        </div>
+        <div class="footer-brand">
+          <span class="footer-text">XOGA</span>
+        </div>
+        <div class="footer-links">
+          <a href="contacto.html">Contacto</a>
+          <a href="politica-de-privacidad.html">Politica de privacidad</a>
+        </div>
+      </div>
+      <div class="footer-legal">© 2026 XOGA. Todos los derechos de imagen reservados.</div>
+    </footer>
 
   </div>
   <script src="icons.js"></script>

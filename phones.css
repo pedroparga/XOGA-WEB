@@ -66,6 +66,36 @@
   top: 140px;
 }
 
+/* Showcase layout */
+.showcase-visual .iphones-container {
+  height: 100%;
+}
+
+.showcase-visual .iphone-a {
+  transform: rotateX(12deg) rotateY(18deg) scale(0.92);
+  z-index: 12;
+  top: -240px;
+  left: 10px;
+}
+
+.showcase-visual .iphone-b {
+  transform: rotateX(8deg) rotateY(-6deg) scale(1.02);
+  z-index: 20;
+  top: -330px;
+  left: 170px;
+}
+
+.showcase-visual .iphone-c {
+  transform: rotateX(14deg) rotateY(-20deg) scale(0.9);
+  z-index: 8;
+  top: -160px;
+  left: 320px;
+}
+
+.showcase-visual .iphone-body {
+  animation: none;
+}
+
 /* iPhone 16 Main Body Container - 2556×1179 resolution */
 .iphone-body {
   --body-radius: 45px;
