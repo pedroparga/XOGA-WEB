@@ -406,18 +406,21 @@
   }
 
   .showcase-visual .iphone-body {
-    transform: scale(0.8);
+    transform: scale(0.6);
   }
 
   .showcase-visual .iphone-a {
-    left: -10px;
+    left: -30px;
+    top: -190px;
   }
 
   .showcase-visual .iphone-b {
-    left: 90px;
+    left: 60px;
+    top: -240px;
   }
 
   .showcase-visual .iphone-c {
-    left: 190px;
+    left: 150px;
+    top: -110px;
   }
 }
