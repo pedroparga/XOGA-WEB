@@ -1,6 +1,14 @@
 export async function onRequestPost({ request, env }) {
   try {
-    const body = await request.json();
+    let body = {};
+    const contentType = request.headers.get("content-type") || "";
+
+    if (contentType.includes("application/json")) {
+      body = await request.json();
+    } else if (contentType.includes("application/x-www-form-urlencoded") || contentType.includes("multipart/form-data")) {
+      const form = await request.formData();
+      body = Object.fromEntries(form.entries());
+    }
 
     const name = String(body.name || "").trim();
     const email = String(body.email || "").trim();
