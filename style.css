@@ -1022,6 +1022,10 @@ body {
   font-size: 14px;
   font-family: inherit;
 }
+.contact-form textarea {
+  resize: vertical;
+  max-height: 220px;
+}
 
 .contact-form input:focus,
 .contact-form select:focus,
