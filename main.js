@@ -96,7 +96,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       try {
-        const response = await fetch(contactForm.action || "/api/contact", {
+        const formAction = contactForm.getAttribute("action") || "";
+        const endpoint = formAction === "#" || formAction === "" ? "/api/contact" : formAction;
+        const response = await fetch(endpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
