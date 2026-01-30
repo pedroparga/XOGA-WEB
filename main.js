@@ -62,4 +62,76 @@ document.addEventListener("DOMContentLoaded", () => {
       if (window.innerWidth > 600) closeMenu();
     });
   }
+
+  const contactForm = document.querySelector("[data-contact-form]");
+  if (contactForm) {
+    const statusEl = contactForm.querySelector("[data-form-status]");
+    const submitBtn = contactForm.querySelector("button[type='submit']");
+
+    const setStatus = (message, isError = false) => {
+      if (!statusEl) return;
+      statusEl.textContent = message;
+      statusEl.classList.toggle("is-error", isError);
+    };
+
+    contactForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(contactForm);
+      const name = String(formData.get("name") || "").trim();
+      const email = String(formData.get("email") || "").trim();
+      const subject = String(formData.get("subject") || "").trim();
+      const message = String(formData.get("message") || "").trim();
+      const company = String(formData.get("company") || "");
+
+      if (!name || !email || !message) {
+        setStatus("Completa nombre, email y mensaje.", true);
+        return;
+      }
+
+      const composedMessage = subject ? `Asunto: ${subject}\n\n${message}` : message;
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.dataset.originalText = submitBtn.textContent;
+        submitBtn.textContent = "Enviando...";
+      }
+
+      try {
+        const response = await fetch(contactForm.action || "/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            email,
+            message: composedMessage,
+            company,
+          }),
+        });
+
+        let payload = null;
+        try {
+          payload = await response.json();
+        } catch {
+          payload = null;
+        }
+
+        if (!response.ok) {
+          const errorMessage = payload && payload.error ? payload.error : "Error enviando el mensaje. Prueba de nuevo.";
+          setStatus(errorMessage, true);
+          return;
+        }
+
+        contactForm.reset();
+        setStatus("Mensaje enviado. Te responderemos pronto.");
+      } catch {
+        setStatus("Error enviando el mensaje. Prueba de nuevo.", true);
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = submitBtn.dataset.originalText || "Enviar mensaje";
+        }
+      }
+    });
+  }
 });
