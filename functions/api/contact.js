@@ -12,6 +12,7 @@ export async function onRequestPost({ request, env }) {
 
     const name = String(body.name || "").trim();
     const email = String(body.email || "").trim();
+    const subject = String(body.subject || "").trim();
     const message = String(body.message || "").trim();
     const company = String(body.company || ""); // honeypot
 
@@ -33,7 +34,7 @@ export async function onRequestPost({ request, env }) {
         from: env.CONTACT_FROM,
         to: [env.CONTACT_TO],
         reply_to: email,
-        subject: `Mensaje desde la web - ${name}`,
+        subject: subject || "Contacto",
         text: `Nombre: ${name}\nEmail: ${email}\n\nMensaje:\n${message}`,
       }),
     });
