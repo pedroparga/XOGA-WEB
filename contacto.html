@@ -45,7 +45,7 @@
         <div class="contact-form">
           <h2>Nos encanta escuchar a la comunidad</h2>
           <p>Si tienes cualquier duda o idea sobre la app de partidos XOGA, estaremos encantados de leerte.</p>
-          <form class="contact-form-element" action="#" method="post" data-contact-form>
+          <form class="contact-form-element" action="/api/contact" method="post" target="contact-submit-frame" data-contact-form>
             <label>
               Nombre
               <input type="text" name="name" placeholder="Tu nombre" required />
@@ -77,6 +77,7 @@
             <button class="cta-primary" type="submit">Enviar mensaje</button>
             <p class="form-note" data-form-status>Te responderemos lo antes posible.</p>
           </form>
+          <iframe name="contact-submit-frame" title="contact-submit-frame" style="display:none"></iframe>
         </div>
         <div class="contact-side">
           <h3>O si lo prefieres&hellip;</h3>
