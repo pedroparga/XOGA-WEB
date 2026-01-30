@@ -125,9 +125,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         contactForm.reset();
         setStatus("Mensaje enviado. Te responderemos pronto.");
-        setTimeout(() => {
-          window.location.reload();
-        }, 400);
       } catch {
         setStatus("Error enviando el mensaje. Prueba de nuevo.", true);
       } finally {
