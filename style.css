@@ -128,6 +128,25 @@ body {
   position: relative;
   z-index: 12;
 }
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.lang-link {
+  color: var(--muted);
+  text-decoration: none;
+}
+.lang-link.is-active {
+  color: var(--ink);
+  font-weight: 700;
+}
+.lang-sep {
+  color: rgba(255, 255, 255, 0.35);
+}
 
 .menu-toggle {
   display: none;

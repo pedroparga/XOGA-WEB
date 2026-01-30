@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contacto XOGA | Soporte de la app de partidos deportivos</title>
-  <meta name="description" content="Contacto XOGA: soporte de la app para organizar partidos y torneos. Escr&iacute;benos para dudas, sugerencias o colaboraciones." />
+  <title>Contact XOGA | Support for the sports games app</title>
+  <meta name="description" content="Contact XOGA: support for the app to organize games and tournaments. Write to us for questions, suggestions or collaborations." />
   <link rel="icon" type="image/png" href="imagenes/logoClaroSinFondo.png" />
   <link rel="stylesheet" href="style.css" />
   <script src="main.js" defer></script>
@@ -14,23 +14,23 @@
   <div class="page">
     <header class="topbar">
       <div class="topbar-inner">
-        <a class="brand" href="index.html">
+        <a class="brand" href="index-en.html">
           <img class="brand-mark" src="imagenes/brand-mark.png" alt="XOGA" />
           <span class="brand-text">XOGA</span>
         </a>
         <nav class="nav" id="main-nav">
-          <a href="index.html#como-se-usa">C&oacute;mo se usa</a>
-          <a href="sobre-nosotros.html">Sobre nosotros</a>
-          <a href="contacto.html">Contacto</a>
-          <a href="preguntas-frecuentes.html">Preguntas frecuentes</a>
+          <a href="index-en.html#how-it-works">How it works</a>
+          <a href="about-en.html">About</a>
+          <a href="contact-en.html">Contact</a>
+          <a href="faq-en.html">FAQ</a>
         </nav>
         <div class="topbar-actions">
-          <div class="lang-switch" aria-label="Selector de idioma">
-            <span class="lang-link is-active">ES</span>
+          <div class="lang-switch" aria-label="Language selector">
+            <a class="lang-link" href="contacto.html">ES</a>
             <span class="lang-sep">|</span>
-            <a class="lang-link" href="contact-en.html">EN</a>
+            <span class="lang-link is-active">EN</span>
           </div>
-          <button class="menu-toggle" type="button" aria-label="Abrir men&uacute;" aria-expanded="false" aria-controls="main-nav">
+          <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
             <span></span>
             <span></span>
             <span></span>
@@ -41,60 +41,60 @@
 
     <main class="contact-page">
       <section class="contact-hero">
-        <span class="contact-kicker">Contacto</span>
-        <h1>Contacta con XOGA</h1>
-        <p>&iquest;Tienes dudas, sugerencias o quieres colaborar? Escr&iacute;benos.</p>
+        <span class="contact-kicker">Contact</span>
+        <h1>Contact XOGA</h1>
+        <p>Have questions, suggestions or want to collaborate? Write to us.</p>
       </section>
 
       <section class="contact-main">
         <div class="contact-form">
-          <h2>Nos encanta escuchar a la comunidad</h2>
-          <p>Si tienes cualquier duda o idea sobre la app de partidos XOGA, estaremos encantados de leerte.</p>
+          <h2>We love hearing from the community</h2>
+          <p>If you have any question or idea about the XOGA sports app, we will be happy to read it.</p>
           <form class="contact-form-element" action="/api/contact" method="post" target="contact-submit-frame" data-contact-form>
             <label>
-              Nombre
-              <input type="text" name="name" placeholder="Tu nombre" required />
+              Name
+              <input type="text" name="name" placeholder="Your name" required />
             </label>
             <label>
               Email
-              <input type="email" name="email" placeholder="tu@email.com" required />
+              <input type="email" name="email" placeholder="you@email.com" required />
             </label>
             <label>
-              Asunto
+              Subject
               <select name="subject">
-                <option>Duda</option>
-                <option>Sugerencia</option>
-                <option>Problema t&eacute;cnico</option>
-                <option>Colaboraci&oacute;n</option>
-                <option>Otro</option>
+                <option>Question</option>
+                <option>Suggestion</option>
+                <option>Technical issue</option>
+                <option>Collaboration</option>
+                <option>Other</option>
               </select>
             </label>
             <div style="position:absolute; left:-9999px;">
               <label>
-                Empresa
+                Company
                 <input type="text" name="company" autocomplete="off" tabindex="-1" />
               </label>
             </div>
             <label>
-              Mensaje
-              <textarea name="message" rows="5" placeholder="Cu&eacute;ntanos" required></textarea>
+              Message
+              <textarea name="message" rows="5" placeholder="Tell us" required></textarea>
             </label>
-            <button class="cta-primary" type="submit">Enviar mensaje</button>
-            <p class="form-note" data-form-status>Te responderemos lo antes posible.</p>
+            <button class="cta-primary" type="submit">Send message</button>
+            <p class="form-note" data-form-status>We will reply as soon as possible.</p>
           </form>
           <iframe name="contact-submit-frame" title="contact-submit-frame" style="display:none"></iframe>
         </div>
         <div class="contact-side">
-          <h3>O si lo prefieres&hellip;</h3>
+          <h3>Or if you prefer...</h3>
           <p>Email: xogaapp@gmail.com</p>
-          <p>Redes sociales: <a href="https://www.instagram.com/xogaapp">Instagram</a> / TikTok</p>
+          <p>Social: <a href="https://www.instagram.com/xogaapp">Instagram</a> / TikTok</p>
         </div>
       </section>
 
       <section class="contact-support">
-        <h3>Ay&uacute;danos a mejorar</h3>
-        <p>XOGA est&aacute; en constante evoluci&oacute;n. Tu feedback nos ayuda a crear una mejor experiencia para todos.</p>
-        <a class="cta-secondary" href="#top">Enviar sugerencia</a>
+        <h3>Help us improve</h3>
+        <p>XOGA is constantly evolving. Your feedback helps us build a better experience for everyone.</p>
+        <a class="cta-secondary" href="#top">Send suggestion</a>
       </section>
     </main>
 
@@ -120,13 +120,13 @@
           <span class="footer-text">XOGA</span>
         </div>
         <div class="footer-links">
-          <a href="contacto.html">Contacto</a>
-          <a href="politica-de-privacidad.html">Pol&iacute;tica de privacidad</a>
-          <a href="aviso-legal.html">Aviso legal</a>
-          <a href="politica-de-cookies.html">Pol&iacute;tica de cookies</a>
+          <a href="contact-en.html">Contact</a>
+          <a href="privacy-en.html">Privacy policy</a>
+          <a href="legal-en.html">Legal notice</a>
+          <a href="cookies-en.html">Cookie policy</a>
         </div>
       </div>
-      <div class="footer-legal">&copy; 2026 XOGA. Todos los derechos de imagen reservados.</div>
+      <div class="footer-legal">&copy; 2026 XOGA. All image rights reserved.</div>
     </footer>
   </div>
 </body>
