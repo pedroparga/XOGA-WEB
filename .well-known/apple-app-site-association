@@ -3,7 +3,7 @@
     "apps": [],
     "details": [
       {
-        "appID": "96R74G8KFG.com.example.xoga",
+        "appID": "96R74G8KFG.com.xogaapp.app"",
         "paths": [ "/m/*", "/match/*", "/s/*", "/share/*" ]
       }
     ]
