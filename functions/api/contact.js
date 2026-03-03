@@ -14,9 +14,9 @@ export async function onRequestPost({ request, env }) {
     const email = String(body.email || "").trim();
     const subject = String(body.subject || "").trim();
     const message = String(body.message || "").trim();
-    const company = String(body.company || ""); // honeypot
+    const hpField = String(body.hp_field || body.company || ""); // honeypot
 
-    if (company) {
+    if (hpField) {
       return new Response("OK", { status: 200 });
     }
 

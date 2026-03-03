@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const name = String(formData.get("name") || "").trim();
       const email = String(formData.get("email") || "").trim();
       const message = String(formData.get("message") || "").trim();
-      const company = String(formData.get("company") || "");
+      const hpField = String(formData.get("hp_field") || "");
       const subject = String(formData.get("subject") || "").trim();
 
       if (!name || !email || !message) {
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
             email,
             subject,
             message,
-            company,
+            hp_field: hpField,
           }),
         });
 
