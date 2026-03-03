@@ -3,4 +3,5 @@
 /s/*                 /                     302
 /share/*             /                     302
 /match/*             /                     302
+/api/*               /api/:splat          200
 /*                   /index.html           200

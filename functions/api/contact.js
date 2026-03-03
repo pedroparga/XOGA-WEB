@@ -24,6 +24,16 @@ export async function onRequestPost({ request, env }) {
       return json({ error: "Faltan campos" }, 400);
     }
 
+    if (!isValidEmailFormat(email)) {
+      return json({ error: "Email invalido" }, 400);
+    }
+
+    const emailDomain = email.split("@")[1]?.toLowerCase() || "";
+    const canReceiveEmail = await domainCanReceiveEmail(emailDomain);
+    if (!canReceiveEmail) {
+      return json({ error: "El dominio del email no existe o no puede recibir correo" }, 400);
+    }
+
     const resendResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -55,4 +65,56 @@ function json(data, status = 200) {
     status,
     headers: { "Content-Type": "application/json" },
   });
+}
+
+function isValidEmailFormat(email) {
+  if (!email || email.length > 254) return false;
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(email);
+}
+
+async function domainCanReceiveEmail(domain) {
+  const normalizedDomain = String(domain || "").trim().replace(/\.$/, "").toLowerCase();
+  if (!normalizedDomain || normalizedDomain.includes("..") || normalizedDomain === "localhost") {
+    return false;
+  }
+
+  // Reject only explicit NXDOMAIN responses. Any transient/ambiguous DNS state
+  // should not block legitimate contact requests.
+  const existsByA = await dnsDomainExists(normalizedDomain, "A");
+  if (existsByA === false) return false;
+  if (existsByA === true) return true;
+
+  const existsByMX = await dnsDomainExists(normalizedDomain, "MX");
+  if (existsByMX === false) return false;
+  if (existsByMX === true) return true;
+
+  const existsByAAAA = await dnsDomainExists(normalizedDomain, "AAAA");
+  if (existsByAAAA === false) return false;
+
+  // Fail open if DNS provider is unavailable or inconclusive.
+  return true;
+}
+
+async function dnsDomainExists(domain, type) {
+  try {
+    const url = `https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=${type}`;
+    const response = await fetch(url, {
+      headers: { Accept: "application/dns-json" },
+    });
+
+    if (!response.ok) return null;
+    const data = await response.json();
+
+    const status = Number(data?.Status);
+    if (status === 3) {
+      return false;
+    }
+
+    // Any non-NXDOMAIN response means the domain likely exists.
+    if (Number.isFinite(status)) return true;
+
+    return null;
+  } catch {
+    return null;
+  }
 }
