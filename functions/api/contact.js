@@ -70,6 +70,22 @@ export async function onRequestPost({ request, env }) {
   }
 }
 
+export async function onRequestGet({ env }) {
+  return json(
+    {
+      ok: true,
+      endpoint: "/api/contact",
+      functions_active: true,
+      config: {
+        resend_api_key: Boolean(env.RESEND_API_KEY),
+        contact_from: Boolean(env.CONTACT_FROM),
+        contact_to: Boolean(env.CONTACT_TO),
+      },
+    },
+    200
+  );
+}
+
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
