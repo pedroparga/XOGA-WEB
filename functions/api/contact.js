@@ -14,9 +14,21 @@ export async function onRequestPost({ request, env }) {
     const email = String(body.email || "").trim();
     const subject = String(body.subject || "").trim();
     const message = String(body.message || "").trim();
-    // Honeypot temporarily disabled because some browsers/autofill tools
-    // can populate hidden fields and block legitimate submissions.
-    const hpField = String(body.hp_field || body.company || "");
+    const hpField = String(body.hp_field || "").trim(); // honeypot
+    const formTs = Number(body.form_ts || 0);
+
+    // Silent spam trap.
+    if (hpField) {
+      return json({ ok: true }, 200);
+    }
+
+    // If form was submitted almost instantly after page load, treat as bot.
+    if (Number.isFinite(formTs) && formTs > 0) {
+      const elapsedMs = Date.now() - formTs;
+      if (elapsedMs >= 0 && elapsedMs < 1200) {
+        return json({ ok: true }, 200);
+      }
+    }
 
     if (!name || !email || !message) {
       return json({ error: "Faltan campos" }, 400);

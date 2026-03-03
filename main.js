@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (contactForm) {
     const statusEl = contactForm.querySelector("[data-form-status]");
     const submitBtn = contactForm.querySelector("button[type='submit']");
+    const formStartedAt = Date.now();
 
     const setStatus = (message, isError = false) => {
       if (!statusEl) return;
@@ -107,6 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
             subject,
             message,
             hp_field: hpField,
+            form_ts: formStartedAt,
           }),
         });
 
