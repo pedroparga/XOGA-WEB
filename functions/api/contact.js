@@ -14,11 +14,9 @@ export async function onRequestPost({ request, env }) {
     const email = String(body.email || "").trim();
     const subject = String(body.subject || "").trim();
     const message = String(body.message || "").trim();
-    const hpField = String(body.hp_field || body.company || ""); // honeypot
-
-    if (hpField) {
-      return new Response("OK", { status: 200 });
-    }
+    // Honeypot temporarily disabled because some browsers/autofill tools
+    // can populate hidden fields and block legitimate submissions.
+    const hpField = String(body.hp_field || body.company || "");
 
     if (!name || !email || !message) {
       return json({ error: "Faltan campos" }, 400);

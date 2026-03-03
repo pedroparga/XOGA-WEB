@@ -112,9 +112,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const contentType = response.headers.get("content-type") || "";
         let payload = null;
+        let rawText = "";
         try {
           if (contentType.includes("application/json")) {
             payload = await response.json();
+          } else {
+            rawText = await response.text();
           }
         } catch {
           payload = null;
@@ -124,9 +127,13 @@ document.addEventListener("DOMContentLoaded", () => {
           const errorMessage =
             payload && payload.error
               ? payload.error
-              : "No se pudo confirmar el envio del mensaje. Revisa la configuracion del endpoint /api/contact.";
+              : `No se pudo confirmar el envio del mensaje (HTTP ${response.status}).`;
           const detailText =
-            payload && payload.details ? ` (${String(payload.details).slice(0, 200)})` : "";
+            payload && payload.details
+              ? ` (${String(payload.details).slice(0, 200)})`
+              : rawText
+                ? ` (${String(rawText).replace(/\s+/g, " ").slice(0, 200)})`
+                : "";
           setStatus(`${errorMessage}${detailText}`, true);
           return;
         }
