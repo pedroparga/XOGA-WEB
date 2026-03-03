@@ -146,12 +146,12 @@
 .iphone-notch {
   background: #000;
   border-radius: 20px;
-  height: 35px;
+  height: 28px;
   left: 50%;
-  margin-left: -60px;
+  margin-left: -45px;
   position: absolute;
-  top: 24px;
-  width: 120px;
+  top: 20px;
+  width: 90px;
   z-index: 15;
 }
 
@@ -161,12 +161,12 @@
   border-radius: 4px;
   box-shadow: 0 0 4px lighten(#010101, 8%);
   content: "";
-  height: 7px;
+  height: 5px;
   left: 50%;
-  margin-left: -35px;
+  margin-left: -26px;
   position: absolute;
-  top: 8px;
-  width: 70px;
+  top: 7px;
+  width: 52px;
 }
 
 /* Camera & TrueDepth sensors */
@@ -294,16 +294,16 @@
   }
 
   .iphone-notch {
-    height: 26px;
-    margin-left: -45px;
-    top: 26px;
-    width: 90px;
+    height: 22px;
+    margin-left: -37px;
+    top: 22px;
+    width: 74px;
   }
 
   .iphone-notch::before {
-    height: 5px;
-    margin-left: -26px;
-    width: 52px;
+    height: 4px;
+    margin-left: -21px;
+    width: 42px;
   }
 
   .iphone-speaker {
@@ -362,17 +362,17 @@
   }
 
   .iphone-notch {
-    height: 21px;
-    margin-left: -36px;
-    top: 22px;
-    width: 72px;
-    border-radius: 16px;
+    height: 18px;
+    margin-left: -29px;
+    top: 20px;
+    width: 58px;
+    border-radius: 14px;
   }
 
   .iphone-notch::before {
-    height: 4px;
-    margin-left: -21px;
-    width: 42px;
+    height: 3px;
+    margin-left: -17px;
+    width: 34px;
   }
 
   .iphone-speaker {
@@ -438,3 +438,4 @@
     top: -110px;
   }
 }
+
