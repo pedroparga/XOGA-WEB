@@ -110,15 +110,21 @@ document.addEventListener("DOMContentLoaded", () => {
           }),
         });
 
+        const contentType = response.headers.get("content-type") || "";
         let payload = null;
         try {
-          payload = await response.json();
+          if (contentType.includes("application/json")) {
+            payload = await response.json();
+          }
         } catch {
           payload = null;
         }
 
-        if (!response.ok) {
-          const errorMessage = payload && payload.error ? payload.error : "Error enviando el mensaje. Prueba de nuevo.";
+        if (!response.ok || !payload || payload.ok !== true) {
+          const errorMessage =
+            payload && payload.error
+              ? payload.error
+              : "No se pudo confirmar el envio del mensaje. Revisa la configuracion del endpoint /api/contact.";
           setStatus(errorMessage, true);
           return;
         }
