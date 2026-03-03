@@ -125,7 +125,9 @@ document.addEventListener("DOMContentLoaded", () => {
             payload && payload.error
               ? payload.error
               : "No se pudo confirmar el envio del mensaje. Revisa la configuracion del endpoint /api/contact.";
-          setStatus(errorMessage, true);
+          const detailText =
+            payload && payload.details ? ` (${String(payload.details).slice(0, 200)})` : "";
+          setStatus(`${errorMessage}${detailText}`, true);
           return;
         }
 

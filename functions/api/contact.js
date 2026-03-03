@@ -24,6 +24,16 @@ export async function onRequestPost({ request, env }) {
       return json({ error: "Faltan campos" }, 400);
     }
 
+    if (!env.RESEND_API_KEY) {
+      return json({ error: "Falta configurar RESEND_API_KEY en el entorno" }, 500);
+    }
+    if (!env.CONTACT_FROM) {
+      return json({ error: "Falta configurar CONTACT_FROM en el entorno" }, 500);
+    }
+    if (!env.CONTACT_TO) {
+      return json({ error: "Falta configurar CONTACT_TO en el entorno" }, 500);
+    }
+
     if (!isValidEmailFormat(email)) {
       return json({ error: "Email invalido" }, 400);
     }
