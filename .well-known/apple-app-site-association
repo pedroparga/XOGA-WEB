@@ -4,7 +4,17 @@
     "details": [
       {
         "appID": "96R74G8KFG.com.xogaapp.app",
-        "paths": [ "/m/*", "/match/*", "/s/*", "/share/*" ]
+        "paths": [
+          "/m/*", 
+          "/match/*", 
+          "/s/*", 
+          "/share/*",
+          "/app/open",
+          "/app/open/*",
+          "/reset-password",
+          "/reset-password/*",
+          "/reset_password",
+          "/reset_password/*"]
       }
     ]
   }
