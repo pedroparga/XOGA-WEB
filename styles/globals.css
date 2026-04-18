@@ -34,29 +34,6 @@ html {
   background-color: #061a22;
 }
 
-body::before,
-body::after {
-  content: "";
-  position: fixed;
-  left: 0;
-  right: 0;
-  pointer-events: none;
-  z-index: 999;
-}
-
-body::before {
-  top: 0;
-  height: env(safe-area-inset-top);
-  background: rgba(4, 16, 22, 0.92);
-}
-
-body::after {
-  bottom: 0;
-  height: env(safe-area-inset-bottom);
-  background: rgba(4, 16, 22, 0.6);
-  backdrop-filter: blur(8px);
-}
-
 a {
   color: inherit;
 }
@@ -84,7 +61,7 @@ img {
 }
 
 .topbar {
-  padding: calc(20px + env(safe-area-inset-top)) calc(6vw + env(safe-area-inset-right)) 20px calc(6vw + env(safe-area-inset-left));
+  padding: 20px 6vw;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   background: transparent;
   position: sticky;
@@ -811,7 +788,7 @@ img {
 }
 
 .site-footer {
-  padding: 50px calc(6vw + env(safe-area-inset-right)) 60px calc(6vw + env(safe-area-inset-left));
+  padding: 50px 6vw 60px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(4, 16, 22, 0.6);
   backdrop-filter: blur(8px);
@@ -1389,7 +1366,7 @@ img {
 
 @media (max-width: 600px) {
   .topbar {
-    padding: calc(16px + env(safe-area-inset-top)) calc(5vw + env(safe-area-inset-right)) 16px calc(5vw + env(safe-area-inset-left));
+    padding: 16px 5vw;
   }
 
   .hero {
@@ -1515,7 +1492,7 @@ img {
   }
 
   .site-footer {
-    padding: 40px calc(5vw + env(safe-area-inset-right)) 50px calc(5vw + env(safe-area-inset-left));
+    padding: 40px 5vw 50px;
   }
 
   .about-page {
