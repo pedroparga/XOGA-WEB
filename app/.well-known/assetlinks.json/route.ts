@@ -1,0 +1,20 @@
+const body = [
+  {
+    relation: ["delegate_permission/common.handle_all_urls"],
+    target: {
+      namespace: "android_app",
+      package_name: "com.xogaapp.app",
+      sha256_cert_fingerprints: [
+        "01:46:CF:41:51:33:B2:7D:18:4C:A7:30:61:E6:95:04:03:1A:FC:0C:D3:F3:46:44:4A:C7:8B:CD:AA:02:BF:52"
+      ]
+    }
+  }
+];
+
+export function GET() {
+  return Response.json(body, {
+    headers: {
+      "Content-Type": "application/json; charset=utf-8"
+    }
+  });
+}
