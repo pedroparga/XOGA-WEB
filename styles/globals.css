@@ -53,7 +53,8 @@ body::before {
 body::after {
   bottom: 0;
   height: env(safe-area-inset-bottom);
-  background: #061a22;
+  background: rgba(4, 16, 22, 0.6);
+  backdrop-filter: blur(8px);
 }
 
 a {
@@ -810,7 +811,7 @@ img {
 }
 
 .site-footer {
-  padding: 50px calc(6vw + env(safe-area-inset-right)) calc(60px + env(safe-area-inset-bottom)) calc(6vw + env(safe-area-inset-left));
+  padding: 50px calc(6vw + env(safe-area-inset-right)) 60px calc(6vw + env(safe-area-inset-left));
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(4, 16, 22, 0.6);
   backdrop-filter: blur(8px);
@@ -1514,7 +1515,7 @@ img {
   }
 
   .site-footer {
-    padding: 40px calc(5vw + env(safe-area-inset-right)) calc(50px + env(safe-area-inset-bottom)) calc(5vw + env(safe-area-inset-left));
+    padding: 40px calc(5vw + env(safe-area-inset-right)) 50px calc(5vw + env(safe-area-inset-left));
   }
 
   .about-page {
