@@ -65,7 +65,7 @@ export async function POST(request: Request) {
 
     const resend = new Resend(apiKey);
 
-    await resend.emails.send({
+    const result = await resend.emails.send({
       from,
       to: [to],
       replyTo: email,
@@ -73,8 +73,24 @@ export async function POST(request: Request) {
       text: `Nombre: ${name}\nEmail: ${email}\n\nMensaje:\n${message}`
     });
 
-    return NextResponse.json({ ok: true });
-  } catch {
-    return NextResponse.json({ error: "Peticion invalida" }, { status: 400 });
+    if (result.error) {
+      console.error("Resend send failed", {
+        message: result.error.message,
+        name: result.error.name
+      });
+
+      return NextResponse.json(
+        {
+          error:
+            "Error enviando email. Revisa CONTACT_FROM y que el dominio/remitente este verificado en Resend."
+        },
+        { status: 502 }
+      );
+    }
+
+    return NextResponse.json({ ok: true, id: result.data?.id ?? null });
+  } catch (error) {
+    console.error("Contact route failed", error);
+    return NextResponse.json({ error: "Error procesando la peticion" }, { status: 500 });
   }
 }
